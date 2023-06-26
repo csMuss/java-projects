@@ -15,25 +15,47 @@ public class MissleInterceptionTest {
 
     public static void testMethod(){
         print("Starting Test...");
+        
+        boolean hasInterception = false;
 
         point redLandingSpot = new point(100, 400, 0, 100);
         point redStartingSpot = new point(0,0,0,0);
-        //point blueLandingSpot = new point(100, 320, 0, 100);
-        point[] lineHolder = lineSegment(redStartingSpot, redLandingSpot);
         
-        for(int time = 0; time < 100; time++){
+        point blueLandingSpot = new point(0,0,0,0);
+        point blueStartingSpot = redLandingSpot;
+        
+        point[] lineHolderRed = lineSegment(redStartingSpot, redLandingSpot);
+        point[] lineHolderBlue = lineSegment(blueStartingSpot, blueLandingSpot);
+        
+        for(int time = 0; time < redLandingSpot.getTime(); time++){
         	
-        	point holder = traceLine(lineHolder, getSlope(lineHolder), time);
-        	
-            int x = holder.getX();
-            int y = holder.getY();
-            int z = 0;
+        	point holderRed = traceLine(lineHolderRed, getSlope(lineHolderRed), time);
+        	point holderBlue = traceLine(lineHolderBlue, getSlope(lineHolderBlue), time);
 
-            point currentPoint = new point(x, y, z, time);
-            missle missleRed = new missle(currentPoint, redLandingSpot);
+            int xRed = holderRed.getX();
+            int yRed = holderRed.getY();
+            int z = 0;
             
-            missleRed.getCurrentPoint().printCoords();
-            System.out.println("=====");
+            int xBlue = holderBlue.getX();
+            int yBlue = holderBlue.getY();
+            
+            point currentPointRed = new point(xRed, yRed, z, time);
+            point currentPointBlue = new point(xBlue, yBlue, z, time);
+            
+            missle missleRed = new missle(currentPointRed, redLandingSpot);
+            missle missleBlue = new missle(currentPointBlue, blueLandingSpot);
+            
+            if(missleRed.getCurrentPoint().getX() == missleBlue.getCurrentPoint().getX() && missleRed.getCurrentPoint().getY() == missleBlue.getCurrentPoint().getY()) {
+            	hasInterception = true;
+            }
+            
+            //missleRed.getCurrentPoint().printCoords();
+            //missleBlue.getCurrentPoint().printCoords();
+            //System.out.println("=====");
+        }
+        
+        if(hasInterception == true) {
+        	print("Interception Succesful");
         }
         
         print("Ending Test...");
