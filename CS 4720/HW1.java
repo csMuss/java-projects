@@ -14,7 +14,7 @@
  * computer in the math center.
  * 
  * */
-package hw1;
+package homework1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,7 +37,7 @@ public class HW1 {
 		printArray(mergeSort(readInput()));
 		long endTimeM = System.nanoTime();
 		long msortTime = (endTimeM - startTimeM);
-		
+
 		System.out.println("Selection Sort: " + ssortTime);
 		// 2512698700, 2.512 seconds
 		System.out.println("Merge Sort: " + msortTime);
@@ -50,9 +50,9 @@ public class HW1 {
 		// Try loop to avoid throwing an exception in main
 		try {
 			// Reading in the file
-			//File fileToRead = new File("input.txt");
+			// File fileToRead = new File("input.txt");
 			File fileToRead = new File("input_large.txt");
-			//File fileToRead = new File("input_ta.txt");
+			// File fileToRead = new File("input_ta.txt");
 			Scanner readFile = new Scanner(fileToRead);
 			// Counter to 0, to count number of items in the file
 			int counter = 0;
